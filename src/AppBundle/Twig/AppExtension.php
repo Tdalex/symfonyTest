@@ -2,16 +2,22 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Entity\Article;
+
 class AppExtension extends \Twig_Extension {
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('tags', array($this, 'tagFunction')),
+            new \Twig_SimpleFunction('tags', array($this, 'getAllTags')),
         );
     }
 
-    public function tagFunction()
+    public function getAllTags(Article $article)
     {
-        return $tags;
+        $labels = array();
+        foreach($article->getTags() as $tags){
+            $labels = $tag->getName();
+        }
+        return implode(' - ', $labels);
     }
-}
+}   
